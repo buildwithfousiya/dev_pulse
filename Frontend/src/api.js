@@ -1,7 +1,8 @@
 import axios from 'axios';
 
 const VITE_API_URL = import.meta.env.VITE_API_URL || '';
-const API_BASE_URL = `${VITE_API_URL}/api/issues`;
+const cleanApiUrl = VITE_API_URL.replace(/\/+$/, '');
+const API_BASE_URL = `${cleanApiUrl}/api/issues`;
 
 const api = axios.create({
   baseURL: API_BASE_URL,
@@ -20,7 +21,7 @@ export const fetchIssues = async (filters = {}) => {
   }
 
   try {
-    const response = await api.get('/', { params });
+    const response = await api.get('', { params });
     return response.data;
   } catch (error) {
     throw new Error(error.response?.data?.message || 'Failed to fetch issues');
@@ -38,7 +39,7 @@ export const fetchIssueStats = async () => {
 
 export const createIssue = async (issueData) => {
   try {
-    const response = await api.post('/', issueData);
+    const response = await api.post('', issueData);
     return response.data;
   } catch (error) {
     throw new Error(error.response?.data?.message || 'Failed to create issue');
