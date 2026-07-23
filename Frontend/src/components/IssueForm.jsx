@@ -39,6 +39,9 @@ const IssueForm = ({ isOpen, onClose, onSubmit }) => {
     if (!formData.assignee.trim()) {
       newErrors.assignee = 'Assignee name is required';
     }
+    if (!formData.tags.trim()) {
+      newErrors.tags = 'Tags are required';
+    }
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
   };
@@ -133,6 +136,7 @@ const IssueForm = ({ isOpen, onClose, onSubmit }) => {
                   value={formData.tags}
                   onChange={handleChange}
                 />
+                {errors.tags && <span className="form-error">{errors.tags}</span>}
               </div>
             </div>
 
