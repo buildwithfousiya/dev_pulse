@@ -24,3 +24,5 @@ const PORT = process.env.PORT;
 const server = app.listen(PORT, () => {
   console.log(`Server running in ${PORT}`);
 });
+
+module.exports = app;
